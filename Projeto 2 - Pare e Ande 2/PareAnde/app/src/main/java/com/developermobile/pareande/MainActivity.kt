@@ -1,16 +1,16 @@
 package com.developermobile.pareande
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.developermobile.pareande.databinding.ActivityRedBinding
+import com.developermobile.pareande.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
-    private val binding: ActivityRedBinding by lazy { ActivityRedBinding.inflate(layoutInflater) }
+    private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private var flag = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +38,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun chamarOutra() {
-        startActivity(Intent(this, GreenActivity::class.java))
+       if (!flag) {
+           binding.main.setBackgroundResource(R.color.green)
+           binding.tvMsg.text = getString(R.string.msg_walk)
+           binding.btnTrocar.text = getString(R.string.btn_replace)
+           flag = true
+       } else {
+           binding.main.setBackgroundResource(R.color.red)
+           binding.tvMsg.text = getString(R.string.msg_stop)
+           binding.btnTrocar.text = getString(R.string.btn_replace)
+           flag = false
+
+       }
     }
 }
